@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Job_Plataform.Data.Migrations
 {
-    public partial class jobpost : Migration
+    public partial class jobpostentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,6 +18,7 @@ namespace Job_Plataform.Data.Migrations
                     Descripton = table.Column<string>(nullable: true),
                     Salary = table.Column<int>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
+                    CompanyName = table.Column<string>(nullable: true),
                     ContactPhone = table.Column<string>(nullable: true),
                     ContactEmail = table.Column<string>(nullable: true),
                     ContactWebSite = table.Column<string>(nullable: true),

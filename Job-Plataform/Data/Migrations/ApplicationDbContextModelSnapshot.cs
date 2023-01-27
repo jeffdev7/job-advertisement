@@ -29,6 +29,9 @@ namespace Job_Plataform.Data.Migrations
                     b.Property<byte[]>("CompanyImage")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ContactEmail")
                         .HasColumnType("nvarchar(max)");
 

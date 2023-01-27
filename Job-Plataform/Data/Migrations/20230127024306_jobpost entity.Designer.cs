@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Job_Plataform.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230127013739_jobpost")]
-    partial class jobpost
+    [Migration("20230127024306_jobpost entity")]
+    partial class jobpostentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,6 +30,9 @@ namespace Job_Plataform.Data.Migrations
 
                     b.Property<byte[]>("CompanyImage")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContactEmail")
                         .HasColumnType("nvarchar(max)");
