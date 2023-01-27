@@ -83,7 +83,9 @@ namespace Job_Plataform.Controllers
 
             return RedirectToAction("Index");
         }
-        public IActionResult DeleteJobPost(int id)
+        //TODO: method for Edit
+        [HttpDelete]
+        public IActionResult DeleteJobPostById(int id)
         {
             if(id == 0)
                 return BadRequest();
@@ -96,7 +98,7 @@ namespace Job_Plataform.Controllers
             _dbContext.JobPosts.Remove(jobFromDb);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Index");
+            return Ok();
         }
     }
 }
