@@ -1,5 +1,6 @@
 ﻿using Job_Plataform.Data;
 using Job_Plataform.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Linq;
 
 namespace Job_Plataform.Controllers
 {
+    [Authorize]
     public class JobPostController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
@@ -25,6 +27,9 @@ namespace Job_Plataform.Controllers
             {
                 var jobFromDb = _dbContext.JobPosts.SingleOrDefault(_ => _.Id == id);
 
+                if(jobFromDb.OwnerUserName != User.Identity.Name)
+                    return Unauthorized();
+
                 if(jobFromDb != null)
                 {
                     return View(jobFromDb);
@@ -37,7 +42,7 @@ namespace Job_Plataform.Controllers
             }
             return View();
         }
-        public IActionResult CreateEditJob(JobPost job, IFormFile fileForImage)
+        public IActionResult CreateEditJobForm(JobPost job, IFormFile fileForImage)
         {
             job.OwnerUserName = User.Identity.Name;
 

@@ -1,4 +1,5 @@
-﻿using Job_Plataform.Models;
+﻿using Job_Plataform.Data;
+using Job_Plataform.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,16 +12,19 @@ namespace Job_Plataform.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ApplicationDbContext _dbContext;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext)
         {
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var allJobs = _dbContext.JobPosts.ToList();
+            return View(allJobs);
         }
 
         public IActionResult Privacy()
