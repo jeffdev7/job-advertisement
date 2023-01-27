@@ -16,14 +16,31 @@ namespace Job_Plataform.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var jobFromDb = _dbContext.JobPosts.Where(_ => _.OwnerUserName == User.Identity.Name).ToList();
+            return View(jobFromDb);
         }
         public IActionResult CreateEditJobPost(int id)
         {
+            if(id != 0)
+            {
+                var jobFromDb = _dbContext.JobPosts.SingleOrDefault(_ => _.Id == id);
+
+                if(jobFromDb != null)
+                {
+                    return View(jobFromDb);
+                }
+                else
+                {
+                    return NotFound();
+                }
+                
+            }
             return View();
         }
         public IActionResult CreateEditJob(JobPost job, IFormFile fileForImage)
         {
+            job.OwnerUserName = User.Identity.Name;
+
             if(fileForImage != null)
             {
                 using(var ms = new MemoryStream())
@@ -58,10 +75,25 @@ namespace Job_Plataform.Controllers
                 jobFromDb.ContactEmail = job.ContactEmail;
                 jobFromDb.ContactWebSite = job.ContactWebSite;
                 jobFromDb.CompanyImage = job.CompanyImage;
+                jobFromDb.OwnerUserName = job.OwnerUserName;
                 
-                _dbContext.JobPosts.Update(job);
             }
 
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+        public IActionResult DeleteJobPost(int id)
+        {
+            if(id == 0)
+                return BadRequest();
+
+            var jobFromDb = _dbContext.JobPosts.SingleOrDefault(_ => _.Id == id);
+
+            if( jobFromDb == null)
+                return NotFound();
+
+            _dbContext.JobPosts.Remove(jobFromDb);
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index");

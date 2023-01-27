@@ -16,5 +16,7 @@ namespace Job_Plataform.Models
         public string ContactWebSite { get; set; }
         public byte[] CompanyImage { get; set; }
 
+        public string OwnerUserName { get; set; }
+
     }
 }

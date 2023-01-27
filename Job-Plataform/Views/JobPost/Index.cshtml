@@ -7,17 +7,28 @@
 <table class="table table-bordered table-striped table-hover">
     <thead class="thead-dark">
         <tr>
-            <th>Id</th>
-            <th>Name</th>
+            <th>Job Title</th>
+            <th>Ort</th>
+            <th>Firma Name</th>
+            <th>Aktionen</th>
         </tr>
 
     </thead>
     <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-
-        </tr>
+        @{
+            foreach (JobPost job in Model)
+            {
+                <tr>
+                    <td>@job.JobTitle</td>
+                    <td>@job.JobLocation</td>
+                    <td>@job.CompanyName</td>
+                    <td>
+                        <a asp-route-id="@job.Id" class="btn btn-warning" asp-controller="JobPost" asp-action="CreateEditJobPost">Edit</a>
+                        <a asp-route-id="@job.Id" class="btn btn-danger" asp-controller="JobPost" asp-action="DeleteJobPost">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
 
     </tbody>
 </table>
