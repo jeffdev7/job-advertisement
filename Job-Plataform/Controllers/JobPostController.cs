@@ -72,7 +72,7 @@ namespace Job_Plataform.Controllers
 
                 jobFromDb.JobTitle = job.JobTitle;
                 jobFromDb.JobLocation = job.JobLocation;
-                jobFromDb.Descripton = job.Descripton;
+                jobFromDb.Description = job.Description;
                 jobFromDb.Salary = job.Salary;
                 jobFromDb.StartDate = job.StartDate;
                 jobFromDb.CompanyName = job.CompanyName;

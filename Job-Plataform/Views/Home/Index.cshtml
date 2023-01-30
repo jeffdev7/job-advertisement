@@ -29,10 +29,10 @@
     @{
         foreach (JobPost job in Model)
         {
-            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+            <a onclick="showModal(@job.Id)" data-toggle="modal" class="list-group-item list-group-item-action" aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">@job.JobTitle</h5>
-                    <small>job.Location</small>
+                    <small>@job.JobLocation</small>
                 </div>
                 <p class="mb-1">@job.CompanyName</p>
                 <small>Start: @job.StartDate.ToShortDateString()</small>
@@ -42,3 +42,53 @@
     }
 
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalJobPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" class="img-fluid" src=""/>
+                <div id="modalDescription">
+
+                </div>
+                <hr />
+                <div id="modalSalary" class="mt-2">
+
+                </div>
+                <div id="modalContact">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<script>
+    function showModal(id){
+        debugger;
+
+        $.ajax({
+             type: "GET",
+                url:"@Url.Action("GetJobPostById")",
+                data:{id: id},
+                success: function(data){
+                    debugger;
+                    $('#modalImage').attr('src', `data:image/png;base64,${data.companyImage}`);
+                    $('#modalTitle').text(data.jobTitle);
+                    $('#modalDescription').text(data.description);
+                    $('#modalSalary').text("Jahresgehalt: $ " + data.salary);
+                    $('#modalContact').text("Contact: " + data.contactEmail);
+                     $('#modalJobPost').modal('show')
+                }
+        })  
+    }
+</script>
+}         

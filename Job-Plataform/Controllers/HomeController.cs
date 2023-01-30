@@ -37,5 +37,19 @@ namespace Job_Plataform.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpGet]
+        public IActionResult GetJobPostById(int id)
+        {
+            if (id == 0)
+                return BadRequest();
+
+            var jobPostFromDb = _dbContext.JobPosts.SingleOrDefault(_ => _.Id == id);
+
+            if(jobPostFromDb == null)
+                return NotFound();
+
+            return Ok(jobPostFromDb);
+        }
     }
 }
