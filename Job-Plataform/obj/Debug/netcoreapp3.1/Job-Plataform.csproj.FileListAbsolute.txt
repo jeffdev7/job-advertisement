@@ -164,3 +164,4 @@ C:\Users\Jefferson\Documents\Job-Plataform\Job-Plataform\bin\Debug\netcoreapp3.1
 C:\Users\Jefferson\Documents\Job-Plataform\Job-Plataform\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Jefferson\Documents\Job-Plataform\Job-Plataform\obj\Debug\netcoreapp3.1\Razor\Views\JobPost\CreateEditJobPost.cshtml.g.cs
 C:\Users\Jefferson\Documents\Job-Plataform\Job-Plataform\obj\Debug\netcoreapp3.1\Razor\Views\JobPost\Index.cshtml.g.cs
+C:\Users\Jefferson\Documents\Job-Plataform\Job-Plataform\obj\Debug\netcoreapp3.1\Razor\Views\Home\_JobPostListPartial.cshtml.g.cs

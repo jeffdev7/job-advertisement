@@ -1,0 +1,19 @@
+﻿@model List<JobPost>
+
+<div class="list-group mt-4">
+    @{
+        foreach (JobPost job in Model)
+        {
+            <a onclick="showModal(@job.Id)" data-toggle="modal" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">@job.JobTitle</h5>
+                    <small>@job.JobLocation</small>
+                </div>
+                <p class="mb-1">@job.CompanyName</p>
+                <small>Start: @job.StartDate.ToShortDateString()</small>
+            </a>
+
+        }
+    }
+
+</div>

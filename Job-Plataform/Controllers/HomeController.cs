@@ -51,5 +51,21 @@ namespace Job_Plataform.Controllers
 
             return Ok(jobPostFromDb);
         }
+
+        public IActionResult GetJobPostPartial(string query)
+        {
+            List<JobPost>jobPosts = new List<JobPost>();
+
+            if (string.IsNullOrEmpty(query))
+                jobPosts = _dbContext.JobPosts.ToList();
+            else
+                jobPosts =  _dbContext.JobPosts.Where(_ => _.JobTitle
+                .ToLower()
+                .Contains(query.ToLower()))
+                .ToList();
+
+            
+            return PartialView("_JobPostListPartial", jobPosts);
+        }
     }
 }

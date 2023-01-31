@@ -17,29 +17,14 @@
 
 <div class=row mt-4>
     <div class="col-6">
-        <input class="form-control-lg form-control" type="text" placeholder="Wonach suchst du?" />
+        <input id="inputQuery" class="form-control-lg form-control" type="text" placeholder="Wonach suchst du?" />
     </div>
     <div class="col">
-        <button class="btn btn-lg btn-primary">Suchen</button>
+        <button onclick="onClickSearch()" class="btn btn-lg btn-primary">Suchen</button>
     </div>
 </div>
 <hr />
-
-<div class="list-group mt-4">
-    @{
-        foreach (JobPost job in Model)
-        {
-            <a onclick="showModal(@job.Id)" data-toggle="modal" class="list-group-item list-group-item-action" aria-current="true">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">@job.JobTitle</h5>
-                    <small>@job.JobLocation</small>
-                </div>
-                <p class="mb-1">@job.CompanyName</p>
-                <small>Start: @job.StartDate.ToShortDateString()</small>
-            </a>
-
-        }
-    }
+<div id="partialList">
 
 </div>
 
@@ -72,8 +57,19 @@
 
 @section Scripts{
 <script>
+    debugger;
+
+    $('#partialList').load("/home/GetJobPostPartial/");
+
+    function onClickSearch(){
+             debugger;
+            var query = $('#inputQuery').val();
+            $('#partialList').load("/home/GetJobPostPartial?query=" + query);
+             debugger;
+             console.log("shit " + query);
+        }
+
     function showModal(id){
-        debugger;
 
         $.ajax({
              type: "GET",
