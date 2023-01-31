@@ -1,4 +1,5 @@
 ﻿using Job_Plataform.Data;
+using Job_Plataform.Filters;
 using Job_Plataform.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -7,6 +8,7 @@ namespace Job_Plataform.Controllers.api
 {
     [Route("api/jobposts")]
     [ApiController]
+    [ApiKeyAuth]
     public class ApiJobPostController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
