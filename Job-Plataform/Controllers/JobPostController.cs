@@ -27,7 +27,7 @@ namespace Job_Plataform.Controllers
             var jobFromDb = _dbContext.JobPosts.Where(_ => _.OwnerUserName == User.Identity.Name).ToList();
             return View(jobFromDb);
         }
-        public IActionResult CreateEditJobPost(int id)
+        public IActionResult UpsertJobPost(int id)
         {
             if(id != 0)
             {
@@ -46,9 +46,10 @@ namespace Job_Plataform.Controllers
                 }
                 
             }
+
             return View();
         }
-        public IActionResult CreateEditJobForm(JobPost job, IFormFile fileForImage)
+        public IActionResult UpsertJobForm(JobPost job, IFormFile fileForImage)
         {
             job.OwnerUserName = User.Identity.Name;
 
@@ -85,16 +86,13 @@ namespace Job_Plataform.Controllers
                 jobFromDb.ContactPhone = job.ContactPhone;
                 jobFromDb.ContactEmail = job.ContactEmail;
                 jobFromDb.ContactWebSite = job.ContactWebSite;
-                jobFromDb.CompanyImage = job.CompanyImage;
-                //jobFromDb.OwnerUserName = job.OwnerUserName;
-                
+                jobFromDb.CompanyImage = job.CompanyImage;                
             }
 
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index");
         }
-        //TODO: method for Edit
         [HttpDelete]
         public IActionResult DeleteJobPostById(int id)
         {

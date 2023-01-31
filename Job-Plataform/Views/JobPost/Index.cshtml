@@ -1,8 +1,8 @@
 ﻿@model List<JobPost>
 @{
-    ViewData["Title"] = "Deine Inserate";
+    ViewData["Title"] = "Your Ads";
 }
-<a class="btn btn-primary" asp-controller="JobPost" asp-action="CreateEditJobPost">Neues Inserat anlegen</a>
+<a class="btn btn-primary" asp-controller="JobPost" asp-action="CreateEditJobPost">Publish a new ad</a>
 
 <table id="jobPostTable" class="table table-bordered table-striped table-hover">
     <thead class="thead-dark">
@@ -23,7 +23,7 @@
                     <td>@job.JobLocation</td>
                     <td>@job.CompanyName</td>
                     <td>
-                        <a asp-route-id="@job.Id" class="btn btn-warning" asp-controller="JobPost" asp-action="CreateEditJobPost">Edit</a>
+                        <a asp-route-id="@job.Id" class="btn btn-warning" asp-controller="JobPost" asp-action="UpsertJobPost">Edit</a>
                         <button class="btn btn-danger" onclick="onClickDelete(@job.Id)">Delete</button>
                     </td>
                 </tr>
