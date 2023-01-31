@@ -18,6 +18,12 @@ namespace Job_Plataform.Controllers
         }
         public IActionResult Index()
         {
+            if(User.IsInRole("Admin"))
+            {
+                var allPosts = _dbContext.JobPosts.ToList();
+                return View(allPosts);
+            }
+
             var jobFromDb = _dbContext.JobPosts.Where(_ => _.OwnerUserName == User.Identity.Name).ToList();
             return View(jobFromDb);
         }
@@ -27,7 +33,7 @@ namespace Job_Plataform.Controllers
             {
                 var jobFromDb = _dbContext.JobPosts.SingleOrDefault(_ => _.Id == id);
 
-                if(jobFromDb.OwnerUserName != User.Identity.Name)
+                if(jobFromDb.OwnerUserName != User.Identity.Name && !User.IsInRole("Admin"))
                     return Unauthorized();
 
                 if(jobFromDb != null)
@@ -80,7 +86,7 @@ namespace Job_Plataform.Controllers
                 jobFromDb.ContactEmail = job.ContactEmail;
                 jobFromDb.ContactWebSite = job.ContactWebSite;
                 jobFromDb.CompanyImage = job.CompanyImage;
-                jobFromDb.OwnerUserName = job.OwnerUserName;
+                //jobFromDb.OwnerUserName = job.OwnerUserName;
                 
             }
 

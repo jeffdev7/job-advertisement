@@ -23,8 +23,7 @@ namespace Job_Plataform.Controllers
 
         public IActionResult Index()
         {
-            var allJobs = _dbContext.JobPosts.ToList();
-            return View(allJobs);
+            return View();
         }
 
         public IActionResult Privacy()
